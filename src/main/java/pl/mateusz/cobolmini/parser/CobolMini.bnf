@@ -1,0 +1,74 @@
+{
+  parserClass="pl.mateusz.cobolmini.parser.CobolMiniParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="CobolMini"
+  psiImplClassSuffix="Impl"
+  psiPackage="pl.mateusz.cobolmini.psi"
+  psiImplPackage="pl.mateusz.cobolmini.psi.impl"
+
+  elementTypeHolderClass="pl.mateusz.cobolmini.psi.CobolMiniTypes"
+  elementTypeClass="pl.mateusz.cobolmini.psi.CobolMiniElementType"
+  tokenTypeClass="pl.mateusz.cobolmini.psi.CobolMiniTokenType"
+}
+
+cobolFile ::= line*
+line ::= lineNumber statement
+
+lineNumber ::= LINE_NUMBER
+
+private statement ::= identificationDivision
+| programIdStatement
+| dataDivision
+| workingStorageSection
+| dataItem
+| procedureDivision
+| paragraphLabel
+| performStatement
+| stopRunStatement
+| displayStatement
+
+identificationDivision ::= identificationKeyword DIVISION DOT identificationDivisionContent?
+identificationKeyword ::= IDENTIFICATION | ID
+identificationDivisionContent ::= identificationEntry*
+identificationEntry ::= authorClause
+                      | installationClause
+                      | dateWrittenClause
+                      | dateCompiledClause
+                      | securityClause
+authorClause ::= AUTHOR DOT? commentEntry*
+installationClause ::= INSTALLATION DOT? commentEntry*
+dateWrittenClause ::= DATE_WRITTEN DOT? commentEntry*
+dateCompiledClause ::= DATE_COMPILED DOT? commentEntry*
+securityClause ::= SECURITY DOT? commentEntry*
+commentEntry ::= IDENTIFIER | STRING | INTEGER
+
+programIdStatement ::= PROGRAM_ID DOT? programName DOT?
+programName ::= IDENTIFIER
+
+dataDivision ::= DATA DIVISION DOT
+
+workingStorageSection ::= WORKING_STORAGE SECTION DOT
+
+dataItem ::= levelNumber dataName pictureClause valueClause? DOT
+levelNumber ::= LEVEL_NUMBER
+dataName ::= IDENTIFIER
+pictureClause ::= (PIC | PICTURE) IS? pictureString
+pictureString ::= PICTURE_STRING
+valueClause ::= VALUE IS? literal
+literal ::= INTEGER | STRING
+
+procedureDivision ::= PROCEDURE DIVISION DOT
+
+paragraphLabel ::= paragraphName DOT
+
+performStatement ::= PERFORM paragraphName varyingClause?
+varyingClause ::= VARYING identifier FROM literal BY literal UNTIL condition
+condition ::= identifier EQ literal
+paragraphName ::= IDENTIFIER
+identifier ::= IDENTIFIER
+
+stopRunStatement ::= STOP (RUN | literal) DOT?
+
+displayStatement ::= DISPLAY (IDENTIFIER|literal)+ DOT?
+
