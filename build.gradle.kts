@@ -44,4 +44,13 @@ tasks {
         targetCompatibility = "21"
     }
 }
+sourceSets {
+    main {
+        java {
+            srcDir("src/main/gen")
+        }
+    }
+}
+
+
 

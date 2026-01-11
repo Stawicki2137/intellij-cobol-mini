@@ -15,7 +15,7 @@
 cobolFile ::= line*
 line ::= lineNumber statement
 
-lineNumber ::= LINE_NUMBER
+private lineNumber ::= LINE_NUMBER
 
 private statement ::= identificationDivision
 | programIdStatement
@@ -51,10 +51,10 @@ dataDivision ::= DATA DIVISION DOT
 workingStorageSection ::= WORKING_STORAGE SECTION DOT
 
 dataItem ::= levelNumber dataName pictureClause valueClause? DOT
-levelNumber ::= LEVEL_NUMBER
+private levelNumber ::= LEVEL_NUMBER
 dataName ::= IDENTIFIER
 pictureClause ::= (PIC | PICTURE) IS? pictureString
-pictureString ::= PICTURE_STRING
+private pictureString ::= PICTURE_STRING
 valueClause ::= VALUE IS? literal
 literal ::= INTEGER | STRING
 
@@ -66,7 +66,7 @@ performStatement ::= PERFORM paragraphName varyingClause?
 varyingClause ::= VARYING identifier FROM literal BY literal UNTIL condition
 condition ::= identifier EQ literal
 paragraphName ::= IDENTIFIER
-identifier ::= IDENTIFIER
+private identifier ::= IDENTIFIER
 
 stopRunStatement ::= STOP (RUN | literal) DOT?
 
