@@ -30,5 +30,8 @@
                 fieldName="INSTANCE"
                 language="CobolMini"
                 extensions="cob"/>
+        <lang.parserDefinition
+                language="CobolMini"
+                implementationClass="pl.mateusz.cobolmini.parser.CobolMiniParserDefinition"/>
     </extensions>
 </idea-plugin>
