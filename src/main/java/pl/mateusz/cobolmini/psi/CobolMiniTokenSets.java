@@ -11,10 +11,9 @@ public interface CobolMiniTokenSets {
 
     TokenSet IDENTIFIERS = TokenSet.create(CobolMiniTypes.IDENTIFIER);
     TokenSet LINE_NUMBERS = TokenSet.create(CobolMiniTypes.LINE_NUMBER);
-    TokenSet NUMBERS = TokenSet.create(
-            CobolMiniTypes.INTEGER,
-            CobolMiniTypes.LEVEL_NUMBER
-    );
+    TokenSet INTEGERS = TokenSet.create(CobolMiniTypes.INTEGER);
+    TokenSet LEVEL_NUMBERS = TokenSet.create(CobolMiniTypes.LEVEL_NUMBER);
+
 
     TokenSet PICTURE_STRINGS = TokenSet.create(CobolMiniTypes.PICTURE_STRING);
 
